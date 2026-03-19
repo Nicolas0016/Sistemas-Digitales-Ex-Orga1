@@ -100,3 +100,46 @@ Utilizaremos los siguientes tipos de datos para representar números naturales y
 + Signo + magnitud (sign-magnitude): Se usa el primer dígito (bit) para indicar el signo de la magnitud
 + Exceso $m$:  represento a $n$ como $m + n$.
 De esta manera, estamos desplazando la ubicación de la magnitud asociada al cero del comienzo del rango de representación a la posición $m$. Los valores a la izquierda de $m$ representan números negativos.
+
+Ejemplos de rangos de representación para datos de 3 bits. El rango es:
+
+$$
+\begin{array}{|c|c|c|c|c|c|c|c|}
+\hline
+v_0 & v_1 & v_2 & v_3 & v_4 & v_5 & v_6 & v_7 \\
+\hline
+\end{array}
+$$
+
+> v es el valor de cada dígito, y el subíndice es la posición del dígito.
+
+Los datos del rango son siempre iguales, lo que va a cambiar van a ser las magnitudes asociadas a cada elemento. Los datos son: 
+$$\begin{array}{|c|c|c|c|c|c|c|c|}
+\hline
+v_0 & v_1 & v_2 & v_3 & v_4 & v_5 & v_6 & v_7 \\
+\hline
+000 & 001 & 010 & 011 & 100 & 101 & 110 & 111 \\
+\hline
+\end{array}
+$$
+
+Las magnitudes asociadas al rango serán:
+
+$$\begin{array}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\text{Posición} & v_0 & v_1 & v_2 & v_3 & v_4 & v_5 & v_6 & v_7 \\
+\hline
+\text {Dato} & 000 & 001 & 010 & 011 & 100 & 101 & 110 & 111 \\
+\hline
+\text{Sin signo} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+\text{Signo + magnitud} & 0 & 1 & 2 & 3 & -0 & -1 & -2 & -3 \\
+\hline
+\text{Exceso 2} & -2 & -1 & 0 & 1 & 2 & 3 & 4 & 5 \\
+\hline
+\end{array}
+$$
+> $m = 2$, entonces $n$ se representa como $m + n$. Por ejemplo, el número -1 se representa como $2 + (-1) = 1$, el número 0 se representa como $2 + 0 = 2$, el número 1 se representa como $2 + 1 = 3$, y así sucesivamente.
+
+> Noten que para signo + magnitud hay dos datos asociados al cero (el valor está desnormalizado).
+
