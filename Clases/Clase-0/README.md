@@ -91,3 +91,12 @@ Ahora la magnitud 770 no es representable por quedar fuera del rango overflow:
 
 $$770 = (11\textbf{00000010})_2$$
 > Precisamos 10 dígitos como mínimo para representar la magnitud en base 2.
+
+## Tipos de datos:
+Los datos tienen **información asociada** (valores de cada dígito) y un **tipo de dato** (naturales acotados). El tipo indica cómo interpretar la información, vincularla con una magnitud y qué operaciones realizar.
+
+Utilizaremos los siguientes tipos de datos para representar números naturales y enteros (en binario):
++ Sin signo (unsigned): Representa números positivos
++ Signo + magnitud (sign-magnitude): Se usa el primer dígito (bit) para indicar el signo de la magnitud
++ Exceso $m$:  represento a $n$ como $m + n$.
+De esta manera, estamos desplazando la ubicación de la magnitud asociada al cero del comienzo del rango de representación a la posición $m$. Los valores a la izquierda de $m$ representan números negativos.
