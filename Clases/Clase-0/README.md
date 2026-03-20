@@ -269,3 +269,24 @@ $5 + (-4) = 1 \to 0001_{(2)} \to -4_{(10)}$
 $5 + (-5) = 0 \to 0000_{(2)} \to -5_{(10)}$
 
 > Para interpretear un valor, osea una tira de valores binarios o bits, es necesario conocer su tipo. Tipos distintos para un mismo valor determinan (potencialmente) distintas magnitudes.
+Operaciones aritmético-lógicas:
+Es importante comprender que hay atributos que nos interesa observar tanto de los **datos como de las operaciones**. Por ejemplo: 
++ **De los datos numéricos** si son negativos o pares
++ **De las operaciones** si los resultados se mantienen dentro del rango de representación
+
+> El dato nos permite determinar propiedades del valor representado
+
+Ejemplo, el complemento a 2 de un dato de 4 bits: 
+$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline 
+\text{Interpretación} & \text{signo} & x & x & \text{paridad}\\
+\hline 
+\text{Negativo} & 1 & x & x & x\\
+\hline 
+\text{Positivo} & 0 & x & x & 0\\
+\hline 
+\end{array}
+$$
