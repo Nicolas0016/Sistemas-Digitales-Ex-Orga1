@@ -166,3 +166,106 @@ Escribimos el 2 en la base correspondiente:
 $$\dot{2} = 1000_{(2)} - 2_{(10)} = 1000_{(2)} - 010_{(2)}$$
 Finalmente $\boxed{\cdot{2} = 110_{(2)}}$
 
+Codificando
+
+En base 2, datos de 4 bits:
+
+| | signo + magnitud | complemento a 2  | exceso a 15 |
+|---|---|---|---|
+| 3 | 0011 | 0011 | OVERFLOW |
+|-2| 1010 | 1110 | 1101 |
+|-8| OVERFLOW | 1000 | 0111 |
+
+En base 2, datos de 8 bits:
+
+| | signo + magnitud | complemento a 2  | exceso a 15 |
+|---|---|---|---|
+| 3 | **0**000 0**011** | 0000 **0011** | 0001 0010 |
+|-2| **1**000 0**010** | 1111 **1110** | 0000 **1101** |
+|-8| 1000 1000 | 1111 **1000** | 0000 **0111** |
+
+
+Extendiendo la cantidad de bis de precisión:
++ Signo + Magnitud: Se extiende con 0's, pero el bit más significativo se mentiene indicando el signo.
++ Complemento a 2: se extiende con el valor del bit más significativo
++ Exceso a m: Se extiende siempre con 0's
+
+Enteros como numerales binarios:
+Sin signo.
+Numeral(dato) $\to$ número que representa
+$1111_{(2)} \to 15_{(10)}$
+$1110_{(2)} \to 14_{(10)}$
+$1101_{(2)} \to 13_{(10)}$
+$1100_{(2)} \to 12_{(10)}$
+...
+$0100_{(2)} \to 4_{(10)}$
+$0011_{(2)} \to 3_{(10)}$
+$0010_{(2)} \to 2_{(10)}$
+$0001_{(2)} \to 1_{(10)}$
+$0000_{(2)} \to 0_{(10)}$
+
+Para los numerales de 4 bits.
+
+Signo + Magnitud:
+El primer bit es el signo, los demás son el significado (la magnitud del número en valor absoluto)
+numeral $\to$ número que representa
+$1100_{(2)} \to -4_{(10)}$
+$1011_{(2)} \to -3_{(10)}$
+$1010_{(2)} \to -2_{(10)}$
+$1001_{(2)} \to -1_{(10)}$
+$1000_{(2)} \to -0_{(10)}$
+$0000_{(2)} \to 0_{(10)}$
+$0001_{(2)} \to 1_{(10)}$
+$0010_{(2)} \to 2_{(10)}$
+$0011_{(2)} \to 3_{(10)}$
+$0100_{(2)} \to 4_{(10)}$
+Para numerales de 4 bits.
+
+Complemento a dos
+
+Los numerales que representa positivos son iguales a los anteriores
+Para los negativos, dado un $\cdot{n}$ negativo se representa escribiendo
+$$\cdot{n} = 2^k - n \text{en notación sin signo}$$
+$$\text{cuentas} \to \text{numeral} \to \text{número que representa}$$
+
+$2⁴ + (-1) = 15 \to 1111_{(2)} \to -1_{(10)}$
+$2⁴ + (-2) = 14 \to 1110_{(2)} \to -2_{(10)}$
+$2⁴ + (-3) = 13 \to 1101_{(2)} \to -3_{(10)}$
+$2⁴ + (-4) = 12 \to 1100_{(2)} \to -4_{(10)}$
+$2⁴ + (-5) = 11 \to 1011_{(2)} \to -5_{(10)}$
+$2⁴ + (-6) = 10 \to 1010_{(2)} \to -6_{(10)}$
+$2⁴ + (-7) = 9 \to 1001_{(2)} \to -7_{(10)}$
+$2⁴ + (-8) = 8 \to 1000_{(2)} \to -8_{(10)}$
+
+$0111_{(2)} \to 7_{(10)}$
+$0110_{(2)} \to 6_{(10)}$
+$0101_{(2)} \to 5_{(10)}$
+$0100_{(2)} \to 4_{(10)}$
+$0011_{(2)} \to 3_{(10)}$
+$0010_{(2)} \to 2_{(10)}$
+$0001_{(2)} \to 1_{(10)}$
+$0000_{(2)} \to 0_{(10)}$
+para los numerales de 4 bits.
+
+Exceso a m
+El número n se representa como $m + n$
+$\text{cuentas} \to \text{numeral} \to \text{número que representa}$
+
+$5 + (10) = 15 \to 1111_{(2)} \to 10_{(10)}$
+$5 + (9) = 14 \to 1110_{(2)} \to 9_{(10)}$
+$5 + (8) = 13 \to 1101_{(2)} \to 8_{(10)}$
+$5 + (7) = 12 \to 1100_{(2)} \to 7_{(10)}$
+$5 + (6) = 11 \to 1011_{(2)} \to 6_{(10)}$
+$5 + (5) = 10 \to 1010_{(2)} \to 5_{(10)}$
+$5 + (4) = 9 \to 1001_{(2)} \to 4_{(10)}$
+$5 + (3) = 8 \to 1000_{(2)} \to 3_{(10)}$
+$5 + (2) = 7 \to 0111_{(2)} \to 2_{(10)}$
+$5 + (1) = 6 \to 0110_{(2)} \to 1_{(10)}$
+$5 + (0) = 5 \to 0101_{(2)} \to 0_{(10)}$
+$5 + (-1) = 4 \to 0100_{(2)} \to -1_{(10)}$
+$5 + (-2) = 3 \to 0011_{(2)} \to -2_{(10)}$
+$5 + (-3) = 2 \to 0010_{(2)} \to -3_{(10)}$
+$5 + (-4) = 1 \to 0001_{(2)} \to -4_{(10)}$
+$5 + (-5) = 0 \to 0000_{(2)} \to -5_{(10)}$
+
+> Para interpretear un valor, osea una tira de valores binarios o bits, es necesario conocer su tipo. Tipos distintos para un mismo valor determinan (potencialmente) distintas magnitudes.
