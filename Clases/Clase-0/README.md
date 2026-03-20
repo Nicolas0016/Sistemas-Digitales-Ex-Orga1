@@ -290,3 +290,195 @@ $$
 \hline 
 \end{array}
 $$
+
+## Operaciones lógicas:
+Las operaciones lógicas que veremos pueden involucrar a uno o dos operandos, **se aplican sobre el dato almacenado, o sea los bits del valor representado**.
+
+### El **O lógico** o disyunción ($\lor$)
+Se aplica bit a bit. La operacion $$A \lor B$$ se puede describir atómicamente (por cada elemento indivisible) como $c_i = a_i \lor b_i$. Veamos un ejemplo de 4 bits:
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{b} & 0 & 0 & 1 & 1 \\
+\text{c = a } \lor \text{ b} & 1 & 0 & 1 & 1 \\
+\hline
+\end{array}
+$$
+> notar que la aplicación no depende del tipo de dato, lo trata indistintamente.
+
+> Podemos notar que las operaciones lógicas se aplican **bit a bit**: 
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+ & + & + & + & + \\
+\text{b} & 0 & 0 & 1 & 1 \\
+ & \downarrow & \downarrow & \downarrow & \downarrow \\
+\text{c = a } \lor \text{ b} & 1 & 0 & 1 & 1 \\
+\hline
+\end{array}
+$$
+
+### El **Y lógico** o conjunción ($\land$)
+El y lógico se aplica bit a bit. La operacion $A \land B$ se puede describir atómicamente como $c_i = a_i \land b_i$. Veamos un ejemplo de 4 bits:
+
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{b} & 0 & 0 & 1 & 1 \\
+\text{c = a } \land \text{ b} & 0 & 0 & 1 & 0 \\
+\hline
+\end{array}
+$$
+> Es parecido a multiplicar en binario
+
+### Xor o disyunción exclusiva ($\veebar$)
+El xor se aplica bit a bit. La operacion $A \veebar B$ se puede describir atómicamente como $c_i = a_i \veebar b_i = c_i = (a_i \land \neg b_i) \lor (\neg a_i \land b_i)$. Veamos un ejemplo de 4 bits:
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{b} & 0 & 0 & 1 & 1 \\
+\text{c = a } \veebar \text{ b} & 1 & 0 & 0 & 1 \\
+\hline
+\end{array}
+$$
+> Es parecido a sumar en binario
+### El **No lógico** o negación ($\neg$)
+La negación lógica se aplica bit a bit. La operación $\neg A$ se puede describir atómicamente como $c_i = \neg a_i$, dando vuelta los valores de cada elemento. Veamos un ejemplo de 4 bits:
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{c} =  \neg \text{a} & 0 & 1 & 0 & 1 \\
+\hline
+\end{array}
+$$
+> Es como multiplicar por -1 en binario
+
+### Desplazamiento a la izquierda
+El desplazamiento a la izquierda se aplica desplazando los bits del dato tantas posiciones como se indiquen a la izquierda. La operación $a \ll n = c$ para un dato de $k$ bits se puede describir atómicamente como: 
+
+$$
+c_i = 
+\begin{cases} 
+a_{i-n} & \text{si } n \le i \le k-1 \\
+0 & \text{si } 0 \le i < n
+\end{cases}
+$$
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{c = a } \ll \text{2} & 1 & 0 & 0 & 0 \\
+\hline
+\end{array}
+$$
+
+> lo puedo ver como multiplicar por $2^n$
+
+### Desplazamiento a la derecha:
+El desplazamiento lógico a derecha se aplica desplazamiento los bits del dato tantas posiciones como indiquen a derecha. La operación $a \gg_l n = c$ para un dato de $k$ bits se puede describir atómicamente como: 
+
+$$
+c_i = 
+\begin{cases}
+a_{i+n} & \text{si } 0 \le i < k-n \\
+0 & \text{si } k-n \le i < k
+\end{cases}
+$$
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{c = a } \gg_l \text{2} & 0 & 0 & 1 & 0 \\
+\hline
+\end{array}
+$$
+
+> lo puedo ver como dividir por $2^n$
+
+### Desplazamiento aritmético a la derecha:
+El desplazamiento aritmético a derecha se aplica desplazamiento los bits del dato tantas posiciones como indiquen a derecha. La operación $a \gg_a n = c$ para un dato de $k$ bits se puede describir atómicamente como: 
+
+$$
+c_i = 
+\begin{cases}
+a_{i+n} & \text{si } i \ge n \\
+a_{k-1} & \text{si } i < n
+\end{cases}
+$$
+
+$$
+\begin{array}{|c|c c c c|}
+\hline
+\text{Posición} & v_3 & v_2 & v_1 & v_0 \\
+\hline
+\text{a} & 1 & 0 & 1 & 0 \\
+\text{c = a } \gg_a \text{2} & 1 & 1 & 1 & 0 \\
+\hline
+\end{array}
+$$
+> con k = 4 y n = 2
+
+> $c_0 = a_{0+2} = a_2 = 1$
+
+> $c_1 = a_{1+2} = a_3 = 1$
+
+> $c_2 = a_{2-2} = a_0 = 1$
+
+> $c_3 = a_{3-2} = a_1 = 0$
+
+> lo puedo ver como dividir por $2^n$
+
+### adición binaria
+Veamos que puede suceder cuando sumamos dos dígitos cualquiera en base 2: 
+$$
+\begin{array}{|c|c| c|}
+\hline
+a_i & b_i & a_i + b_i \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 10 \\
+\hline
+\end{array}
+$$
+Podemos notar que la última fila produce un resultado que no se puede representar con un sólo dígito. Para el caso atómico ese 1 va a conocerse como carry o acarreo porque va a afectar la suma del dígito inmediato a la izquierda.
+
+Redefinimos el resultado, dividiendo $a_i + b_i$ entre el resto $r_i$ y su acarreo $c_i$
+
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+a_i & b_i & r_i & c_i \\
+0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+\hline
+\end{array}
+$$
