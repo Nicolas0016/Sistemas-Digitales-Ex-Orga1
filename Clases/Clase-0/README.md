@@ -143,3 +143,26 @@ $$
 
 > Noten que para signo + magnitud hay dos datos asociados al cero (el valor está desnormalizado).
 
+### Codificando números enteros a base binaria
++ Los positivos se representan igual
++ Para los números negativos la forma práctica de saber la forma en que vamos a representarlos es la siguiente:
+    - Si n es la magnitud a representar y $d_3 d_2 d_1 d_0$ los cuatro digitos para representarlo en 4 bits, lo que haceremos es invertir de a uno (cambiar unos por ceros y ceros por unos) y sumar uno.
++ Por ejemplo -4 se representa como inv(4) + 1, en 5 bits: 
+$$inv(01000)_2 + 1 = (10111)_2 + 1 = (11000)_2$$
+
+Otra forma de represetnarlo, para los números negativos lo que se almacena es el complemento de ṅ, a partir de:
+$$
+ṅ = 2^k_{(10)} - n
+$$
+Donde n es la magnitud interpretada, ṅ el dato almacenado y k la cantidad de dígitos (o bits) utilizados para representar al número.
+
+Ejemplo:
+
+Quiero representar el númeor $-2_{(10)}$ con k = 3 dígitos binarios.
+Entonces, $2^k_{(10)} = 2^3_{(10)} = 8_{(10)} = 1000_{(2)}$
+Luego $2 = 1000_{(2)}$ donde 2 es el complemetno a 2 del número.
+
+Escribimos el 2 en la base correspondiente:
+$$\dot{2} = 1000_{(2)} - 2_{(10)} = 1000_{(2)} - 010_{(2)}$$
+Finalmente $\boxed{\cdot{2} = 110_{(2)}}$
+
