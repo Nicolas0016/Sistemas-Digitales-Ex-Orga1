@@ -222,6 +222,7 @@ Teniendo dos sumadores simples (de 1 bit) y sólo una compuerta a elección, arm
 | 1 | 0 | 1 | 0 | 1 |
 | 1 | 1 | 0 | 0 | 1 |
 | 1 | 1 | 1 | 1 | 1 |
+
 ![alt text](image-8.png)
 
 # Ejercicio
@@ -276,3 +277,40 @@ Cada cominación de las líneas e corresponderán a una sola línea en alto de l
 Una y sólo una línea en alto de e corresponderá a una combinación en la salida s.
 
 ![alt text](image-13.png)
+# Timing
+![alt text](image-16.png)
+Para el circuito Shift LR anterior, supongamos (de forma optimista) que todas las compuertas tardan 10ps en poner un resultado válido en sus salidas. A partir de ello, dibujemos el diagrama de tiempos para cuando todas las entradas cambian simultaneamente de 0 a 1.
+
+Diagrama de tiempos:
+
+![alt text](image-17.png)
+
+![alt text](image-18.png)
+
+¿Cuál es el mínimo tiempo que se debe esperar para leer un resultado válido de su salida?
++ En un circuito combinatorio el tiempo que tarda en estabilizarse depende de la cantidad de capas de compuertas (latencia)
++ En este caso debemos esperar al menos $3 \cdot 10ps = 30ps$ para leer un resultado válido de su salida.
+
+# Latchs 
+Son circuitos que permiten trabajar o asegurar el valor de salida.
++ Permiten el cambio de sus salidas según el nivel de las entradas.
++ Utilizan retor alimentación
+Ejemplo latch RS implementado con NOR: 
+![alt text](image-19.png)
+
+Tabla de verdad:
+| S | R | Q | Q' |
+|---|---|---|---|
+| 1 | 0 | 1 | 0 |
+| 0 | 1 | 0 | 1 |
+| 0 | 0 | Q* | Q'*1 |
+| 1 | 1 | 0 | 0 |
+> Se recomienda empezar con S,R = (1,0) y luego S,R = (0,1)
+
+> En este caso Si hay un 0 en S o en R el latch cambia de estado. Y si hay un 1 en S y R el latch no cambia de estado.
+
+> Q* y Q'*1 son los valores que tenía Q y Q' antes de que S y R cambien.
+
+Con S,R = (1,1):
++ El valor de las salidas es inconsistente con la especificación
++ El valor de las salidas depende de la implementación
