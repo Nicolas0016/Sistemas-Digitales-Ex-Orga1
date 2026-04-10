@@ -1,9 +1,11 @@
-# .data
-Es una sección donde se declaran variables globales y constantes.
-+ Contiene variables inicializadas, constantes, cadenas de texto y vectores
-+ Es una zona de lectura y escritura, por lo que se puede modificar durante la ejecución del programa
+# Directivas de Ensamblador
 
-Ejemplo
+## `.data`
+Es una sección donde se declaran variables globales y constantes.
+- Contiene variables inicializadas, constantes, cadenas de texto y vectores.
+- Es una zona de lectura y escritura, por lo que se puede modificar durante la ejecución del programa.
+
+**Ejemplo:**
 ```assembly
 .data
     variable_global: .word 10
@@ -11,87 +13,92 @@ Ejemplo
     vector: .word 1, 2, 3, 4, 5
 ```
 
-# .text
-Es una sección donde se declaran las instrucciones del programa.
-+ Contiene las instrucciones del programa
-+ Es una zona de solo lectura, por lo que no se puede modificar durante la ejecución del programa
+## `.text`
+Es una sección donde las instrucciones del programa son declaradas.
+- Contiene el código fuente y las instrucciones.
+- Es una zona de solo lectura; no puede modificarse en tiempo de ejecución.
 
-Ejemplo
+**Ejemplo:**
 ```assembly
 .text
     # Declaración de instrucciones
-    li $t0, 10 # $t0 = 10
-    li $t1, 20 # $t1 = 20
-    add $t2, $t0, $t1 # $t2 = $t0 + $t1
+    li t0, 10         # t0 = 10
+    li t1, 20         # t1 = 20
+    add t2, t0, t1    # t2 = t0 + t1
 ```
 
-# la
-Me sirve para cargar la dirección de memoria de una variable global o constante en un registro.
+# Instrucciones Básicas
 
-Ejemplo
+## `la` (Load Address)
+Sirve para cargar la dirección de memoria de una variable global o constante en un registro.
+
+**Ejemplo:**
 ```assembly
 .data
     variable_global: .word 10
 
 .text
-    la t0, variable_global # t0 = &variable_global (direccion de memoria)
+    la t0, variable_global # t0 = &variable_global (dirección de memoria)
 ```
-# lw
-Me sirve para cargar el valor de una variable global o constante en un registro.
 
-Ejemplo
+## `lw` (Load Word)
+Sirve para cargar un valor (de 32 bits / 1 word) desde la memoria hacia un registro.
+
+**Ejemplo:**
 ```assembly
 .data
     variable_global: .word 10
 
 .text
-    la t0, variable_global # t0 = &variable_global (direccion de memoria)
-    lw t1, (t0) # t1 = variable_global
+    la t0, variable_global # t0 = &variable_global (dirección de memoria)
+    lw t1, 0(t0)           # t1 = variable_global
 ```
 
-# li
-Me sirve para cargar un valor inmediato en un registro.
+## `li` (Load Immediate)
+Sirve para cargar un valor numérico constante (inmediato) en un registro.
 
-Ejemplo
+**Ejemplo:**
 ```assembly
 .text
     li t0, 10 # t0 = 10
 ```
-# addi
-Me sirve para sumar un valor inmediato a un registro.
 
-Ejemplo
+## `addi` (Add Immediate)
+Sirve para sumar un valor numérico constante a un registro.
+
+**Ejemplo:**
 ```assembly
 .text
-    li t0, 10 # t0 = 10
-    addi t0, t0, 5 # t0 = t0 + 5
+    li t0, 10       # t0 = 10
+    addi t0, t0, 5  # t0 = t0 + 5
 ```
 
-# beq
-Me sirve para comparar dos registros y saltar a una etiqueta si son iguales.
+## `beq` (Branch if Equal)
+Compara dos registros y realiza un salto a una etiqueta si sus valores son iguales.
 
-Ejemplo
+**Ejemplo:**
 ```assembly
 .text
-    li t0, 10 # t0 = 10
-    li t1, 20 # t1 = 20
+    li t0, 10
+    li t1, 20
     beq t0, t1, etiqueta # si t0 == t1, saltar a etiqueta
 ```
 
-# j
-Me sirve para saltar a una etiqueta.
+## `j` (Jump)
+Da un salto incondicional a una etiqueta.
 
-Ejemplo
+**Ejemplo:**
 ```assembly
 .text
-    j etiqueta # saltar a etiqueta XD 
+    j etiqueta # saltar a la etiqueta indicada
 ```
 
-Ejercicio donde uso varios:
+# Ejercicio Integrador
 
-Se cuenta con cuatro datos sin signo de un byte cada uno almacenados en el registro t0 y queremos sumar el valor de los cuatro datos. Escribir un programa en lenguaje ensamblador RISC-V que realice esta operaci´on y almacene el resultado en el registro t0.
-Solucion:
+**Enunciado:**
+Se cuenta con un arreglo en memoria que contiene cuatro datos (words). Queremos iterar sobre ese arreglo, sumar el valor de los cuatro datos y almacenar el resultado en un registro. Escribir el programa en lenguaje ensamblador RISC-V que realice esta operación.
 
+**Solución:**
 ```assembly
 .data
     vector: .word 0x90, 0x1A, 0x00, 0x02
@@ -99,23 +106,22 @@ Solucion:
     
 .text 
 main: 
-    # Guardo la posicion en memoria del inicio del array
+    # Guardo la posición en memoria del inicio del array
     la t0, vector
-    lw t1, longitud # Contador 
-    li t2, 0        # Resultado de la suma
+    lw t1, longitud # Contador de iteraciones
+    li t2, 0        # Resultado acumulado de la suma
 
 for:
-    beq t1, zero, fin # Si t1 es 0, salta a fin
+    beq t1, zero, fin # Si el contador t1 es 0, salta a fin
     
-    lw t3, 0(t0)      # Cargar elemento
-    add t2, t2, t3    # Sumar
+    lw t3, 0(t0)      # Cargar el elemento actual del arreglo
+    add t2, t2, t3    # Sumar el elemento al acumulador
     
-    addi t0, t0, 4    # Siguiente posición
+    addi t0, t0, 4    # Siguiente posición en memoria (4 bytes por word)
     addi t1, t1, -1   # Decrementar contador
-    j for             # Volver al inicio del bucle (Corregido el nombre)
+    j for             # Volver al inicio del bucle
 
 fin:
-    li a7, 10         # Código de salida en muchos simuladores (como RARS/MARS)
+    li a7, 10         # Código de llamada al sistema para Exit (RARS/MARS)
     ecall             # Terminar programa
-``
-
+```
